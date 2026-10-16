@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+
+<title>Review queue — Linda Vista Town Council</title>
+<meta name="description" content="Internal moderation queue for the problem map.">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell">
+    <a class="brand" href="/">
+      <img src="logo.png" alt="" width="40" onerror="this.remove()">
+      <span class="wordmark">Linda Vista <span>Town Council</span></span>
+    </a>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/map">Back to the map</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="shell">
+      <p class="eyebrow">Internal</p>
+      <h1>Review queue</h1>
+      <p class="lede">
+        Reports people have sent from the problem map that nobody has looked at
+        yet. Nothing here is on the website. Approving puts it there; deleting
+        removes it for good.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell narrow" id="review-root">
+
+    <div class="review-bar">
+      <span id="review-who" class="review-who"></span>
+      <button class="btn btn-primary" id="review-in" type="button">Sign in with Google</button>
+      <button class="btn btn-ghost" id="review-out" type="button" hidden>Sign out</button>
+    </div>
+
+    <p class="form-msg" id="review-msg" role="status" aria-live="polite"></p>
+
+    <div id="review-list"><p class="empty">Sign in to see reports waiting for review.</p></div>
+
+    <h2 class="followup-h">Waiting to hear back</h2>
+    <p class="review-foot">
+      Reports whose reporter left an email address. When the council has done
+      something about one, email them, then click <i>Done</i> &mdash; that
+      deletes their address. The report stays on the map.
+    </p>
+    <div id="followup-list"></div>
+
+    <p class="review-foot">
+      Only addresses listed as editors in <code>firestore.rules</code> can see or
+      change anything here — signing in with any other Google account shows an
+      empty queue, because Firestore refuses the read. To add someone, edit that
+      list and run <code>firebase deploy --only firestore:rules</code>.
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Linda Vista Town Council</span>
+      <span><a href="/map">Problem map</a> · <a href="/">Home</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="firebase-config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Problem Map — Linda Vista Town Council</title>
+<meta name="description" content="Drop a pin on the spot. Speeding, a streetlight out, broken sidewalk, dumping, an abandoned vehicle — a map of what Linda Vista neighbors are reporting.">
+<link rel="canonical" href="https://lindavistatowncouncil.org/map">
+
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Linda Vista Problem Map">
+<meta property="og:description" content="Drop a pin on the spot. A neighbor-reported map of what needs fixing.">
+<meta property="og:url" content="https://lindavistatowncouncil.org/map">
+<meta property="og:image" content="https://lindavistatowncouncil.org/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell">
+    <a class="brand" href="/">
+      <img src="logo.png" alt="" width="40" onerror="this.remove()">
+      <span class="wordmark">Linda Vista <span>Town Council</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/new">New Here</a>
+      <a href="/meetings">Meetings</a>
+      <a href="/events">Events</a>
+      <a href="/your-town">Your Town</a>
+      <a href="/map" aria-current="page">Map</a>
+      <a href="/businesses">Businesses</a>
+      <a href="/contact">Contact</a>
+      <a class="cta" href="/membership">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="shell">
+      <p class="eyebrow">Problem map</p>
+      <h1>Show us where</h1>
+      <p class="lede">
+        A street name in a meeting is an anecdote. Forty pins on one block is an
+        argument. Drop a pin where the problem actually is, say what it is in a
+        sentence, and it goes into what we take to the City.
+      </p>
+    </div>
+  </section>
+
+  <div class="shell">
+
+    <!-- ===================== THE MAP ===================== -->
+    <section class="section" id="the-map">
+
+      <div class="map-note">
+        <p>
+          <b>This is not the City's system, and a pin here does not dispatch anyone.</b>
+          If something needs fixing now &mdash; a pothole, a dead streetlight, dumping
+          &mdash; report it to
+          <a href="https://www.sandiego.gov/get-it-done" rel="noopener">Get It Done</a>
+          first, because that creates a ticket with a tracking number. Then pin it here
+          too. The City closes tickets one at a time; what it does not see is the
+          pattern, and the pattern is the thing that changes a budget.
+        </p>
+      </div>
+
+      <div id="map-filters" class="filterbar" role="group" aria-label="Filter reports by category"></div>
+
+      <div id="lvmap" class="lvmap" role="application" aria-label="Map of reported problems in Linda Vista"></div>
+
+      <p id="map-count" class="map-count">Loading reports…</p>
+      <p class="map-count">The outlined area is Linda Vista as the City draws it. Pins can only go inside it.</p>
+    </section>
+
+    <!-- ===================== THE FORM ===================== -->
+    <section class="section" id="report">
+      <div class="section-head">
+        <h2>Report something</h2>
+        <p>Three steps, no account, about thirty seconds. An email address only if you want to hear back.</p>
+      </div>
+
+      <div class="report-grid">
+
+        <form class="form report-form" id="report-form" novalidate>
+          <p class="step"><b>1.</b> Tap the map above where the problem is.
+            <span id="pin-state" class="pin-state">Tap the map to drop a pin.</span>
+          </p>
+          <p class="btn-row">
+            <button class="btn btn-ghost" type="button" id="use-location">Use my location</button>
+          </p>
+          <input type="hidden" name="lat" value="">
+          <input type="hidden" name="lng" value="">
+
+          <div class="field">
+            <label for="rep-cat"><b>2.</b> What kind of problem?</label>
+            <select id="rep-cat" name="category"></select>
+          </div>
+
+          <div class="field">
+            <label for="rep-note"><b>3.</b> What is wrong?</label>
+            <textarea id="rep-note" name="note" rows="4" maxlength="280"
+              placeholder="Cars regularly take the corner at 45 in a 25, and there are kids at the bus stop."></textarea>
+            <span id="note-left" class="qnote">280 characters left</span>
+          </div>
+
+          <div class="field">
+            <label for="rep-email"><b>4.</b> Want to hear what happens? <span class="hint">Optional. Leave it blank and the report is just as anonymous as before.</span></label>
+            <input id="rep-email" name="email" type="email" maxlength="254"
+              autocomplete="email" inputmode="email" placeholder="you@example.com">
+            <span class="qnote">Only the board sees this. It is never shown on the map, and it is used for one thing: telling you what the council did about this report.</span>
+          </div>
+
+          <p class="btn-row">
+            <button class="btn btn-primary" type="submit">Send the report</button>
+          </p>
+          <p class="form-msg" id="report-msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="report-side">
+          <h3>What happens to it</h3>
+          <ol class="steps">
+            <li>Your report is saved, but it does <b>not</b> go on the map yet.</li>
+            <li>A board member reads it. Every single one, by hand.</li>
+            <li>If it is a real report about Linda Vista, it appears on the map &mdash;
+              usually within a day or two.</li>
+            <li>When a pattern shows up, it goes into a meeting agenda and into what we
+              send to Council District&nbsp;7.</li>
+          </ol>
+
+          <h3>Please don't</h3>
+          <p class="side-note">
+            Name people, post addresses of neighbors you are annoyed with, or report
+            anything that needs the police. Reports like that get deleted rather than
+            approved. If it is an emergency, call 911; if it is a non-emergency crime,
+            call SDPD at <a href="tel:+16195317000">619-531-7000</a>.
+          </p>
+
+          <h3>What we can see</h3>
+          <p class="side-note">
+            Everyone sees the pin, the category, the sentence you wrote and the date.
+            Not your name, not your IP address &mdash; we don't ask for them and we
+            don't store them.
+          </p>
+          <p class="side-note">
+            If you leave an email address, it is kept apart from the report, only
+            board members can read it, and we use it only to tell you what came of
+            this report. We delete it once the issue is closed, and it never goes
+            on a mailing list. Leave the box empty and we have no way to know who
+            you are.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="foot-grid">
+
+      <div>
+        <h2>Linda Vista Town Council</h2>
+        <address>
+          2130 Ulric Street<br>
+          San Diego, CA 92111
+        </address>
+        <!-- CONFIRM this address is live before publishing -->
+        <p><a href="mailto:lvtowncouncil@gmail.com">lvtowncouncil@gmail.com</a></p>
+        <p><a href="/board">Who&rsquo;s on the board &rarr;</a></p>
+
+        <!-- Social links intentionally omitted until the real account URLs are
+             known. The old site linked to instagram.com / facebook.com /
+             twitter.com — the platforms' front pages, not the council. Add the
+             real profile URLs here, or leave this out.
+        <div class="social">
+          <a href="https://www.instagram.com/YOURHANDLE">Instagram</a>
+          <a href="https://www.facebook.com/YOURPAGE">Facebook</a>
+        </div>
+        -->
+      </div>
+
+      <div>
+        <h2>Meetings</h2>
+        <p><strong>General</strong><br>3rd Wednesday, 6:00pm<br>Baha'i Faith Center &middot; in person</p>
+        <p><strong>Board</strong><br>1st Wednesday, 6:00pm<br>Zoom only</p>
+        <p><a href="/meetings">Agendas and minutes →</a></p>
+      </div>
+
+      <div>
+        <h2>Around town</h2>
+        <ul>
+          <li><a href="https://www.lindavistaplanning.org/" rel="noopener">Linda Vista Planning Group</a></li>
+          <li><a href="https://www.lovelindavista.org/" rel="noopener">Farmers Market</a></li>
+          <li><a href="https://lindavistaupdate.substack.com/" rel="noopener">Linda Vista Update newsletter</a></li>
+          <li><a href="/events">What&rsquo;s coming up</a></li>
+          <li><a href="/new">New to Linda Vista</a></li>
+          <li><a href="/history">How Linda Vista got here</a></li>
+          <li><a href="/map">Problem map</a></li>
+          <li><a href="/businesses">Local businesses</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Stay in the loop</h2>
+        <p>A short email before each meeting with the agenda. Nothing else.</p>
+        <form class="subscribe" id="subscribe-form" action="#" method="post">
+          <label class="skip" for="sub-email">Email address</label>
+          <input id="sub-email" name="email" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Sign up</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Linda Vista Town Council · a volunteer 501(c) community organization</span>
+      <span><a href="/bylaws">Bylaws</a> · <a href="/board">Board</a> · <a href="/contact">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="surveys.js"></script>
+<script src="firebase-config.js"></script>
+<script src="updates.js"></script>
+<script src="lv-boundary.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

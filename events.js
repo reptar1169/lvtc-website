@@ -1,0 +1,48 @@
+/* ==========================================================================
+   One-off events: things happening in Linda Vista on a specific date.
+
+   The council's own meetings are NOT in here — those come from SCHEDULE in
+   app.js and are merged in automatically, so a meeting never has to be typed
+   twice. This file is for everything else: other people's events that are
+   worth telling the neighborhood about.
+
+   Fields
+     date         'YYYY-MM-DD'. Anything before today drops off on its own,
+                  so an old entry can be left here or tidied up whenever.
+     title        Short. It becomes a link if `url` is set.
+     blurb        A sentence or two. Say who is running it if it is not us.
+     detail       Optional grey line after the blurb — time and place.
+     url          Optional link to the ORGANIZER'S own page for the event.
+                  Set this whenever it exists. It is the single most useful
+                  field here: it means people get the details from the people
+                  running the thing, and a change on their end does not leave
+                  our copy wrong.
+     unconfirmed  Optional. true adds a visible note that the council has not
+                  verified the details. Use it for anything taken off a flyer
+                  we could not check against a source. It is better to post
+                  something honestly marked than to either sit on it or
+                  present a photocopy as fact.
+
+   Renders on the homepage and on /events. An empty list is fine.
+   ========================================================================== */
+
+var EVENTS = [
+
+  { date: '2026-09-26',
+    title: 'Coffee with Campillo',
+    blurb: 'Councilmember Campillo\u2019s community coffee, his 60th town hall. ' +
+           'Open to anyone. Not a council event, and not in Linda Vista this time ' +
+           '\u2014 the June one was at Bayside.',
+    detail: '9:00am \u00b7 Mission Trails Regional Park Visitor Center' },
+
+  { date: '2026-11-14',
+    title: 'Mesa Architecture Student Showcase',
+    blurb: 'Architecture students from San Diego Mesa College show their own ' +
+           'designs for a library, in a library \u2014 honoring Rob Wellington ' +
+           'Quigley, who designed this one. Run by AIAS Mesa College, not by the ' +
+           'council.',
+    detail: 'Linda Vista Library, 2160 Ulric St',
+    url: 'https://sandiego.events.mylibrary.digital/event?id=400638',
+    unconfirmed: true }
+
+];

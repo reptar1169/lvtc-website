@@ -1,0 +1,10 @@
+# Linda Vista Town Council
+User-agent: *
+Allow: /
+
+# The moderation queue for the problem map. It already carries a noindex tag
+# and is protected by the editor allowlist in firestore.rules — this just
+# keeps it out of search results as well.
+Disallow: /review
+
+Sitemap: https://lindavistatowncouncil.org/sitemap.xml

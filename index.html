@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Linda Vista Town Council — the neighborhood's voice in San Diego</title>
+<meta name="description" content="The Linda Vista Town Council is the volunteer voice of Linda Vista, San Diego. General meetings the third Wednesday of every month at 6pm, in person at the Baha'i Faith Center. Everyone who lives or works here is welcome.">
+<link rel="canonical" href="https://lindavistatowncouncil.org/">
+
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Linda Vista Town Council">
+<meta property="og:description" content="The volunteer voice of Linda Vista, San Diego. General meetings the third Wednesday of every month at 6pm.">
+<meta property="og:url" content="https://lindavistatowncouncil.org/">
+<meta property="og:image" content="https://lindavistatowncouncil.org/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"NGO",
+  "name":"Linda Vista Town Council",
+  "url":"https://lindavistatowncouncil.org/",
+  "description":"Volunteer community council representing the Linda Vista neighborhood of San Diego.",
+  "address":{"@type":"PostalAddress","streetAddress":"2130 Ulric Street","addressLocality":"San Diego","addressRegion":"CA","postalCode":"92111","addressCountry":"US"},
+  "areaServed":"Linda Vista, San Diego, California"
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell">
+    <a class="brand" href="/">
+      <!-- Drop the council's logo in as logo.png next to index.html.
+           If it's missing, the wordmark below stands on its own. -->
+      <img src="logo.png" alt="" width="40" onerror="this.remove()">
+      <span class="wordmark">Linda Vista <span>Town Council</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/new">New Here</a>
+      <a href="/meetings">Meetings</a>
+      <a href="/events">Events</a>
+      <a href="/your-town">Your Town</a>
+      <a href="/map">Map</a>
+      <a href="/businesses">Businesses</a>
+      <a href="/contact">Contact</a>
+      <a class="cta" href="/membership">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">San Diego · District 7</p>
+          <h1>The neighborhood's voice, run by neighbors.</h1>
+          <p class="lede">
+            The Linda Vista Town Council is an all-volunteer group that takes what
+            residents care about — speeding on our streets, transit plans, the cost
+            of living here — and carries it to the City. <strong>Anyone who lives or
+            works in Linda Vista can come to a meeting, speak, and be heard.</strong>
+            You don't need to be a member.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/meetings">Come to a meeting</a>
+            <a class="btn btn-ghost" href="#poll">Take the current poll</a>
+          </div>
+          <p class="hero-new">Just moved here? <a href="/new">Start with the basics &rarr;</a></p>
+        </div>
+
+        <!-- Rendered from the recurrence rule in app.js — never a typed date -->
+        <aside class="next-meeting" id="next-meeting" aria-label="Next meeting"></aside>
+      </div>
+
+      <dl class="glance">
+        <div>
+          <dt>General meeting</dt>
+          <dd>3rd Wednesday<small>6:00pm · Baha'i Faith Center, in person</small></dd>
+        </div>
+        <div>
+          <dt>Board meeting</dt>
+          <dd>1st Wednesday<small>6:00pm · on Zoom, no in-person option</small></dd>
+        </div>
+        <div>
+          <dt>Membership</dt>
+          <dd>$20 a year<small>$10 seniors &amp; students · not required to attend</small></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= ADUs + THE HOUSING NUMBERS ================= -->
+    <section class="section" id="housing">
+      <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Current business</p>
+        <h2>What the council is working on</h2>
+        <p>
+          <b>Accessory dwelling units are the big one.</b> Members have brought the
+          same complaint to meeting after meeting: four, six and nine-unit ADU
+          complexes going up between single-family houses, with no parking added and
+          no traffic or infrastructure work. The City reformed the rules in 2025.
+          We do not think it went far enough &mdash;
+          <a href="/your-town#advocacy">what we asked for, and what came back &rarr;</a>
+        </p>
+        <p>
+          Every relaxation of ADU rules has been justified by the housing crisis.
+          This is that crisis, measured: the median price of an existing
+          single-family home in San Diego County, with the two dates the rules
+          were loosened marked on it.
+        </p>
+      </div>
+
+      <figure class="chart-fig">
+        <div id="housing-chart"></div>
+        <p class="chart-scroll-note">Scroll the chart sideways &rarr;</p>
+        <figcaption>
+          <p>
+            <b>The line was already steep before either rule existed.</b> The median
+            roughly quadrupled between 1990 and October 2020, when the City adopted
+            the ADU Bonus Program &mdash; from $181,470 to $730,000. It has risen
+            another 37% since. Prices also fell by more than a third between 2005
+            and 2008, with no ADU rule changing either way.
+          </p>
+          <p>
+            So this chart does not show that ADUs raised prices, and it does not show
+            that they lowered them. Housing prices move on interest rates, wages,
+            migration and the business cycle, and no one has isolated the effect of
+            one city program inside that. What it does show is <b>how old the
+            problem is</b>: San Diego was already unaffordable for a generation
+            before the ADU Bonus Program, and it is more unaffordable five years
+            after it. That is the reason to judge these rules by what they actually
+            do on a street &mdash; parking, traffic, the size of the building next
+            door &mdash; rather than by the crisis invoked to justify them.
+          </p>
+          <ul class="mark-notes" id="housing-marks"></ul>
+          <p class="src" id="housing-source"></p>
+          <details class="table-view">
+            <summary>See the figures</summary>
+            <table>
+              <caption>Median sale price, existing single-family home, San Diego County</caption>
+              <thead><tr><th scope="col">Year</th><th scope="col">Median price</th></tr></thead>
+              <tbody id="housing-rows"></tbody>
+            </table>
+          </details>
+        </figcaption>
+      </figure>
+
+      <figure class="chart-fig chart-fig-2">
+        <figcaption class="cap-top">
+          <h3>The same thirty-five years, with rent and inflation beside it</h3>
+          <p>
+            Home prices are dollars and the other two are price indexes, so all
+            three are set to <b>100 in 1990</b> and the chart shows how much each
+            has multiplied since. Putting dollars and an index on two different
+            y-axes would let whoever drew the chart choose where the lines cross,
+            so we don&rsquo;t.
+          </p>
+        </figcaption>
+        <div id="index-chart"></div>
+        <p class="chart-scroll-note">Scroll the chart sideways &rarr;</p>
+        <figcaption>
+          <p>
+            Over thirty-five years the price of a house rose <b>5.5&times;</b>, rent
+            rose <b>3.6&times;</b>, and prices in general rose <b>2.8&times;</b>. So
+            housing did outrun everything else &mdash; but buying outran renting by a
+            long way. Adjusted for inflation, a house costs about twice what it did
+            in 1990 while rent costs about 1.3 times.
+          </p>
+          <p>
+            <b>Since the ADU Bonus Program in 2020, rent has risen 33% while prices
+            in general have risen 27%</b> &mdash; about four points of real increase
+            over five years. Rent has not run away in that period, and an argument
+            made from this page should say so rather than hope nobody checks.
+          </p>
+          <p>
+            That is not evidence the program worked either. It issued a few dozen
+            permits in 2021&ndash;22 and 151 in 2023, in a county with more than a
+            million homes. A program that small cannot move a county-wide price line
+            in either direction &mdash; which is exactly the problem with having
+            justified it by one.
+          </p>
+          <p class="src" id="index-source"></p>
+          <details class="table-view">
+            <summary>See the figures</summary>
+            <table>
+              <caption>Index, 1990 = 100</caption>
+              <thead><tr><th scope="col">Year</th><th scope="col">Home price</th>
+                <th scope="col">Rent</th><th scope="col">All prices</th></tr></thead>
+              <tbody id="index-rows"></tbody>
+            </table>
+          </details>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+
+  <!-- ======================= ALSO ON ======================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Also in front of us</p>
+        <h2>Three other things</h2>
+        <p>Each one is somewhere the council can actually move the City, and each
+           one is stronger with more residents behind it.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <span class="status active">Active</span>
+          <h3>Speeding on Comstock Street</h3>
+          <p>The limit is 25&nbsp;mph and it is not being enforced. After a crash that
+             totalled three cars, we surveyed the neighborhood: 49 residents told us
+             what they want done.</p>
+          <p class="more"><a href="/your-town#comstock">See the survey results →</a></p>
+        </article>
+
+        <article class="card">
+          <span class="status watching">Watching</span>
+          <h3>Rapid Route 41 bus lane</h3>
+          <p>SANDAG's Next Gen Rapid Route&nbsp;41 would run Hillcrest to UC San Diego
+             through Linda Vista. Planning was completed in 2023 and SANDAG is still
+             securing funding — which is the window to weigh in.</p>
+          <p class="more"><a href="/your-town#route41">See what neighbors told us →</a></p>
+        </article>
+
+        <article class="card">
+          <span class="status active">Polling now</span>
+          <h3>Beach parking, and the county sales tax</h3>
+          <p>An ordinance to keep beach and Mission Bay parking free is waiting on a
+             City Council vote, and a half-cent county sales tax is on the November
+             ballot. Both are still open. We want a neighborhood position before they
+             are decided.</p>
+          <p class="more"><a href="#poll">Answer two questions &rarr;</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ POLL ============================ -->
+  <section class="section" id="poll">
+    <div class="shell narrow">
+      <div class="section-head">
+        <p class="eyebrow">Open poll &middot; takes about a minute</p>
+        <h2>Where do you stand?</h2>
+        <p>Two questions the City has not decided yet, and one button. Answer either or
+           both &mdash; results update the moment you send them, and where enough people
+           answer we send the numbers to the offices making the decision.</p>
+      </div>
+
+      <div class="poll">
+        <form id="poll-form" novalidate>
+          <fieldset>
+            <legend class="eyebrow">Your answers</legend>
+            <div id="poll-questions"></div>
+          </fieldset>
+
+          <div class="poll-foot">
+            <button class="btn btn-primary" type="submit">Send my answers</button>
+            <p class="poll-note">Anonymous. No name or email collected.</p>
+          </div>
+          <p class="poll-msg" id="poll-msg" role="status" hidden></p>
+        </form>
+
+        <div class="results" id="results"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== BEYOND LINDA VISTA ====================== -->
+  <!-- Time-limited. The City's survey has no published closing date; check
+       sandiego.gov/planning/work/balboa-park-master-plan-update and take this
+       section out (or point it at the next round of input) when it closes. -->
+  <section class="section" id="balboa-park">
+    <div class="shell narrow">
+      <div class="section-head">
+        <p class="eyebrow">Beyond Linda Vista</p>
+        <h2>Balboa Park is getting a new master plan</h2>
+        <p>It isn&rsquo;t in Linda Vista, but it&rsquo;s a short drive away and plenty
+           of us use it. The City is rewriting the plan that decides what the park
+           becomes over the next few decades, and it is asking the public first.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card" data-tally="balboa-2026" data-tally-since="2026-10-15">
+          <span class="status watching">City survey &middot; open now</span>
+          <h3>Tell the City what you want from the park</h3>
+          <p>About five to ten minutes, anonymous. It asks which parts of the park you
+             use, and has you rank what should come first &mdash; restrooms, shade and
+             seating; playgrounds; gardens and trails; historic buildings; dining; and
+             safer, better-lit walkways and bridges. There is room at the end for your
+             own ideas.</p>
+          <p>This is the City&rsquo;s survey, not ours: answers go straight to the City
+             Planning Department. It&rsquo;s the first round &mdash; workshops come later,
+             and the finished plan is due in 2028. Questions go to
+             <a href="mailto:planbalboapark@sandiego.gov">planbalboapark@sandiego.gov</a>.</p>
+          <p class="btn-row tally-row">
+            <a class="btn btn-primary" data-tally-open target="_blank" rel="noopener"
+               href="https://survey123.arcgis.com/share/00136b69e3de4123a8b465d5d5eb96f6?portalUrl=https://webmaps.sandiego.gov/portal">Take the City&rsquo;s survey &rarr;</a>
+            <button class="btn btn-ghost" type="button" data-tally-took>I took it</button>
+          </p>
+          <p class="tally" data-tally-count role="status" aria-live="polite" hidden></p>
+          <p class="more">
+            <a href="https://www.sandiego.gov/planning/work/balboa-park-master-plan-update" rel="noopener">About the plan &rarr;</a>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== EVENTS =========================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Calendar</p>
+        <h2>What's coming up</h2>
+      </div>
+      <div class="events" id="events"></div>
+      <p class="btn-row"><a class="btn btn-ghost" href="/events">Full calendar</a></p>
+    </div>
+  </section>
+
+  <!-- ========================== INVOLVE =========================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Get involved</p>
+        <h2>Two ways to back the council</h2>
+      </div>
+
+      <div class="involve">
+        <div class="panel">
+          <h3>Join the board</h3>
+          <p>We have open seats. Board members meet once a month, take on one area
+             they care about, and help set what the council pushes for. No experience
+             required — just a stake in the neighborhood.</p>
+          <ul>
+            <li>One evening a month, first Wednesday</li>
+            <li>Pick an issue and run with it</li>
+            <li>Open to any Linda Vista resident</li>
+          </ul>
+          <a class="btn btn-ghost" href="/contact?about=board">Express interest</a>
+        </div>
+
+        <div class="panel">
+          <h3>Become a member</h3>
+          <p>Dues fund meeting space, printing and community events. Membership
+             is not required to attend or speak — it's how you back the work.</p>
+          <div class="dues">
+            <div><b>$20</b><span>Individual or family</span></div>
+            <div><b>$10</b><span>Seniors</span></div>
+            <div><b>$10</b><span>Students</span></div>
+          </div>
+          <ul>
+            <li>A vote in council elections</li>
+            <li>Discounts at participating Linda Vista businesses</li>
+          </ul>
+          <a class="btn btn-primary" href="https://venmo.com/u/lindavistatowncouncil">Pay with Venmo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="foot-grid">
+
+      <div>
+        <h2>Linda Vista Town Council</h2>
+        <address>
+          2130 Ulric Street<br>
+          San Diego, CA 92111
+        </address>
+        <!-- CONFIRM this address is live before publishing -->
+        <p><a href="mailto:lvtowncouncil@gmail.com">lvtowncouncil@gmail.com</a></p>
+        <p><a href="/board">Who&rsquo;s on the board &rarr;</a></p>
+
+        <!-- Social links intentionally omitted until the real account URLs are
+             known. The old site linked to instagram.com / facebook.com /
+             twitter.com — the platforms' front pages, not the council. Add the
+             real profile URLs here, or leave this out.
+        <div class="social">
+          <a href="https://www.instagram.com/YOURHANDLE">Instagram</a>
+          <a href="https://www.facebook.com/YOURPAGE">Facebook</a>
+        </div>
+        -->
+      </div>
+
+      <div>
+        <h2>Meetings</h2>
+        <p><strong>General</strong><br>3rd Wednesday, 6:00pm<br>Baha'i Faith Center &middot; in person</p>
+        <p><strong>Board</strong><br>1st Wednesday, 6:00pm<br>Zoom only</p>
+        <p><a href="/meetings">Agendas and minutes →</a></p>
+      </div>
+
+      <div>
+        <h2>Around town</h2>
+        <ul>
+          <li><a href="https://www.lindavistaplanning.org/" rel="noopener">Linda Vista Planning Group</a></li>
+          <li><a href="https://www.lovelindavista.org/" rel="noopener">Farmers Market</a></li>
+          <li><a href="https://lindavistaupdate.substack.com/" rel="noopener">Linda Vista Update newsletter</a></li>
+          <li><a href="/events">What&rsquo;s coming up</a></li>
+          <li><a href="/new">New to Linda Vista</a></li>
+          <li><a href="/history">How Linda Vista got here</a></li>
+          <li><a href="/map">Problem map</a></li>
+          <li><a href="/businesses">Local businesses</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Stay in the loop</h2>
+        <p>A short email before each meeting with the agenda. Nothing else.</p>
+        <form class="subscribe" id="subscribe-form" action="#" method="post">
+          <label class="skip" for="sub-email">Email address</label>
+          <input id="sub-email" name="email" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Sign up</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Linda Vista Town Council · a volunteer 501(c) community organization</span>
+      <span><a href="/bylaws">Bylaws</a> · <a href="/board">Board</a> · <a href="/contact">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="minutes.js"></script>
+<script src="events.js"></script>
+<script src="firebase-config.js"></script>
+<script src="housing.js"></script>
+<script src="updates.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

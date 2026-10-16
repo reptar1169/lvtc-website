@@ -1,0 +1,170 @@
+rules_version = '2';
+
+// Linda Vista Town Council — poll storage
+//
+// The poll is anonymous and its results are public, so anyone may READ.
+// Anyone may CREATE one response. Nobody may ever edit or delete one, and
+// nothing else in the database is reachable from a browser at all.
+//
+// If you change the poll questions in app.js, update the key list in
+// validAnswers() to match, or new answers will be rejected.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions must live inside the match block — declaring them
+    // after the service block is a syntax error the deploy will reject.
+    function validShape(d) {
+      return d.keys().hasOnly(['poll', 'answers', 'date', 'created'])
+          && d.keys().hasAll(['poll', 'answers', 'date'])
+          && d.poll is string
+          && d.poll.size() > 0 && d.poll.size() <= 40
+          && d.answers is map
+          && d.date is string
+          && d.date.size() == 10;
+    }
+
+    function inRange(a, k) {
+      return !(k in a) || (a[k] is int && a[k] >= -2 && a[k] <= 2);
+    }
+
+    function validAnswers(a) {
+      // Question ids for the CURRENT poll. These must match QUESTIONS in
+      // app.js exactly, and the rules must be deployed BEFORE hosting or the
+      // first answers to a new poll are rejected.
+      return a.keys().hasOnly(['beach_free', 'county_tax'])
+          && a.size() >= 1
+          && a.size() <= 2
+          && inRange(a, 'beach_free')
+          && inRange(a, 'county_tax');
+    }
+
+    match /poll_responses/{id} {
+      allow read: if true;
+      allow update, delete: if false;
+      allow create: if validShape(request.resource.data)
+                    && validAnswers(request.resource.data.answers);
+    }
+
+    /* ------------------------------------------------------------------
+       Report-a-problem map.
+
+       A browser may CREATE a report, but only with status 'pending', and it
+       can never edit or delete one afterwards. A browser may READ a report
+       only once status is 'approved' — which only happens when a human
+       changes the field in the Firebase console. That is the whole
+       moderation system, and it is enforced here rather than in the page.
+
+       Because read is conditional on a field, a query must filter on that
+       same field or Firestore rejects it. app.js queries
+       where('status','==','approved'). Don't remove that.
+
+       The lat/lng box is the extent of the City's Linda Vista community
+       planning area plus about 200 m. The page checks the real outline
+       (lv-boundary.js); rules cannot test a point against an irregular
+       shape, so this box is the backstop. It matches LV_BOUNDS in app.js —
+       change both together.
+       ------------------------------------------------------------------ */
+    function validReport(d) {
+      return d.keys().hasOnly(['category', 'note', 'lat', 'lng', 'status', 'date', 'created'])
+          && d.keys().hasAll(['category', 'note', 'lat', 'lng', 'status', 'date'])
+          && d.status == 'pending'
+          && d.category in ['speeding', 'lighting', 'sidewalk', 'dumping', 'vehicle', 'other']
+          && d.note is string
+          && d.note.size() > 0 && d.note.size() <= 280
+          && d.date is string && d.date.size() == 10
+          && d.lat is number && d.lat >= 32.760 && d.lat <= 32.812
+          && d.lng is number && d.lng >= -117.209 && d.lng <= -117.150;
+    }
+
+    /* Who may moderate. THIS LIST IS THE ACCESS CONTROL for /review — that
+       page is unlisted, but hiding it is not what protects it; this is.
+       Add or remove an address here and redeploy the rules. Addresses must
+       be Google accounts, and must be verified. */
+    function isEditor() {
+      return request.auth != null
+          && request.auth.token.email_verified == true
+          && request.auth.token.email in [
+               'lvtowncouncil@gmail.com',
+               'schoellojeff@gmail.com'
+             ];
+    }
+
+    match /map_reports/{id} {
+      // The public sees approved reports. An editor sees everything, which is
+      // what makes the pending queue on /review load for them and nobody else.
+      allow read: if resource.data.status == 'approved' || isEditor();
+
+      allow create: if validReport(request.resource.data);
+
+      // An editor may flip status and nothing else — not the note, not the
+      // location. So an approved report is always the words the resident
+      // actually wrote, on the spot they actually picked.
+      allow update: if isEditor()
+                    && request.resource.data.diff(resource.data)
+                         .affectedKeys().hasOnly(['status'])
+                    && request.resource.data.status in ['pending', 'approved'];
+
+      allow delete: if isEditor();
+    }
+
+    /* ------------------------------------------------------------------
+       Reporter email, for people who ticked "tell me what happens".
+
+       This is a SEPARATE collection on purpose. Anyone can read an approved
+       map_reports document, every field of it — so an email stored on the
+       report would be public the moment the report was approved. Here the
+       document id is the report's id, and only an editor can ever read it.
+
+       A browser may create one only in the same batch that creates its
+       report (existsAfter, and not exists before), so nobody can attach
+       their address to someone else's report after the fact. Nobody can
+       edit one. Editors delete it when the issue is closed.
+       ------------------------------------------------------------------ */
+    function validContact(d) {
+      return d.keys().hasOnly(['email', 'created'])
+          && d.keys().hasAll(['email'])
+          && d.email is string
+          && d.email.size() >= 3 && d.email.size() <= 254
+          // No backslashes: escaping inside a rules string is easy to get
+          // wrong, and '\\s' read as a literal would reject every address
+          // with an 's' in it. app.js already refuses spaces.
+          && d.email.matches('[^@ ]+@[^@ ]+[.][^@ ]+');
+    }
+
+    match /map_report_contacts/{id} {
+      allow read, delete: if isEditor();
+      allow update: if false;
+      allow create: if validContact(request.resource.data)
+                    && !exists(/databases/$(database)/documents/map_reports/$(id))
+                    && existsAfter(/databases/$(database)/documents/map_reports/$(id))
+                    && getAfter(/databases/$(database)/documents/map_reports/$(id)).data.status == 'pending';
+    }
+
+    /* ------------------------------------------------------------------
+       Outreach tally — how many people this site sent to someone else's
+       survey (opened) and how many say they finished it (took). See
+       section 12 of app.js.
+
+       Anonymous and public, like the poll: anyone may read (the page shows
+       counts) and create; nobody may edit or delete. A document is a
+       campaign name, a kind, and a date — nothing about the person.
+       ------------------------------------------------------------------ */
+    match /outreach_taps/{id} {
+      allow read: if true;
+      allow update, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['campaign', 'kind', 'date', 'created'])
+                    && request.resource.data.keys().hasAll(['campaign', 'kind', 'date'])
+                    && request.resource.data.campaign is string
+                    && request.resource.data.campaign.size() > 0
+                    && request.resource.data.campaign.size() <= 40
+                    && request.resource.data.kind in ['opened', 'took']
+                    && request.resource.data.date is string
+                    && request.resource.data.date.size() == 10;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

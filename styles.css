@@ -1,0 +1,1096 @@
+/* ==========================================================================
+   Linda Vista Town Council — site styles
+   Brand carried over from the existing site:
+     logo red  #e83840      sage (links)  #8ead67      headings  Unna
+   ========================================================================== */
+
+:root{
+  color-scheme: light;
+
+  /* ground & ink */
+  --ground:#fbfaf8;
+  --surface:#ffffff;
+  --surface-2:#f4f4ef;
+  --ink:#1c2018;
+  --ink-2:#535a4c;
+  --muted:#868c7b;
+  --rule:#e3e4dc;
+  --rule-soft:#eeefe8;
+
+  /* brand */
+  --red:#e83840;          /* the logo red — marks and accents only */
+  --red-ink:#bf2a31;      /* darkened for text/links on light ground */
+  --red-wash:#fceceb;
+  --sage:#8ead67;         /* the existing link green — marks only */
+  --sage-ink:#5c7a39;     /* darkened for text on light ground */
+  --sage-wash:#eef3e5;
+
+  /* type */
+  --display:"Unna",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --shadow:0 1px 2px rgba(28,32,24,.06),0 6px 20px -12px rgba(28,32,24,.14);
+  --radius:4px;
+  --gutter:clamp(20px,5vw,40px);
+  --measure:64ch;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --ground:#131510;
+    --surface:#1b1e17;
+    --surface-2:#22261d;
+    --ink:#f0f1ea;
+    --ink-2:#b9bcaf;
+    --muted:#878d7c;
+    --rule:#2d3127;
+    --rule-soft:#242820;
+    --red:#f4736f;
+    --red-ink:#f4736f;
+    --red-wash:#2c1a19;
+    --sage:#a9c47f;
+    --sage-ink:#a9c47f;
+    --sage-wash:#1f2618;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --ground:#131510; --surface:#1b1e17; --surface-2:#22261d;
+  --ink:#f0f1ea; --ink-2:#b9bcaf; --muted:#878d7c;
+  --rule:#2d3127; --rule-soft:#242820;
+  --red:#f4736f; --red-ink:#f4736f; --red-wash:#2c1a19;
+  --sage:#a9c47f; --sage-ink:#a9c47f; --sage-wash:#1f2618;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+
+a{color:var(--sage-ink);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--red-ink)}
+:focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:2px}
+
+.skip{
+  position:absolute;left:-9999px;top:8px;z-index:100;
+  background:var(--surface);color:var(--ink);padding:10px 16px;border:1px solid var(--rule);
+}
+.skip:focus{left:var(--gutter)}
+
+.shell{max-width:1080px;margin:0 auto;padding-inline:var(--gutter)}
+.narrow{max-width:760px}
+
+/* labels ------------------------------------------------------------------ */
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin:0;
+}
+
+/* ---------- header -------------------------------------------------------- */
+.site-header{
+  border-bottom:1px solid var(--rule);
+  background:var(--surface);
+  position:sticky;top:0;z-index:50;
+}
+.site-header .shell{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;padding-block:14px;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand img{width:40px;height:auto}
+.brand .wordmark{
+  font-family:var(--display);font-size:19px;line-height:1.1;font-weight:700;
+  letter-spacing:-.01em;max-width:12ch;
+}
+.brand .wordmark span{display:block;color:var(--red-ink)}
+
+.nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.nav a{
+  font-size:15px;color:var(--ink-2);text-decoration:none;
+  padding:8px 11px;border-radius:var(--radius);white-space:nowrap;
+}
+.nav a:hover{background:var(--surface-2);color:var(--ink)}
+.nav a.cta{
+  background:var(--red-ink);color:#fff;font-weight:600;margin-left:6px;
+}
+.nav a.cta:hover{background:var(--ink);color:#fff}
+.nav-toggle{
+  display:none;background:none;border:1px solid var(--rule);border-radius:var(--radius);
+  color:var(--ink);font:inherit;font-size:14px;padding:8px 12px;cursor:pointer;
+}
+
+@media (max-width:860px){
+  .nav-toggle{display:block}
+  .nav{
+    display:none;position:absolute;left:0;right:0;top:100%;
+    background:var(--surface);border-bottom:1px solid var(--rule);
+    flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gutter) 16px;
+  }
+  .nav.open{display:flex}
+  .nav a{padding:12px 4px;border-bottom:1px solid var(--rule-soft)}
+  .nav a.cta{margin:10px 0 0;text-align:center;padding:12px;border-bottom:none}
+  .site-header .shell{position:relative}
+}
+
+/* ---------- hero ---------------------------------------------------------- */
+.hero{padding-block:clamp(40px,7vw,72px) 0}
+.hero h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(34px,6.4vw,58px);line-height:1.04;letter-spacing:-.02em;
+  margin:12px 0 0;text-wrap:balance;
+}
+.hero .lede{
+  font-size:clamp(18px,2.2vw,21px);line-height:1.55;color:var(--ink-2);
+  margin:18px 0 0;max-width:58ch;
+}
+.hero .lede strong{color:var(--ink);font-weight:600}
+
+.hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);
+  gap:clamp(28px,4vw,52px);align-items:start;margin-top:40px;
+}
+@media (max-width:820px){ .hero-grid{grid-template-columns:minmax(0,1fr)} }
+
+/* next-meeting card — dates are computed, never typed by hand */
+.next-meeting{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.next-meeting .top{
+  background:var(--red-ink);color:#fff;padding:10px 18px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+.next-meeting .body{padding:18px}
+.next-meeting .date{
+  font-family:var(--display);font-size:27px;line-height:1.15;font-weight:700;margin:0;
+}
+.next-meeting .time{color:var(--ink-2);margin:4px 0 0;font-size:16px}
+.next-meeting dl{
+  margin:16px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:7px 14px;font-size:15px;
+}
+.next-meeting dt{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding-top:4px;
+}
+.next-meeting dd{margin:0;color:var(--ink-2)}
+.next-meeting .after{
+  margin:16px 0 0;padding-top:14px;border-top:1px solid var(--rule-soft);
+  font-size:14px;color:var(--muted);
+}
+.next-meeting .nm-flyer{
+  margin:16px 0 0;padding-top:14px;border-top:1px solid var(--rule-soft);
+  font-size:15px;font-weight:600;
+}
+/* when both are present the flyer link owns the separator, not the "Then:" note */
+.next-meeting .nm-flyer + .after{margin-top:8px;padding-top:0;border-top:0}
+
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{
+  display:inline-block;font:inherit;font-size:16px;font-weight:600;
+  padding:12px 20px;border-radius:var(--radius);text-decoration:none;cursor:pointer;
+  border:1px solid transparent;
+}
+.btn-primary{background:var(--red-ink);color:#fff;border-color:var(--red-ink)}
+.btn-primary:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);background:var(--surface)}
+
+/* ---------- at-a-glance strip --------------------------------------------- */
+.glance{
+  margin-top:clamp(40px,6vw,64px);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;background:var(--rule);border-block:1px solid var(--rule);
+}
+.glance div{background:var(--ground);padding:20px 4px 22px}
+.glance dt{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 5px;
+}
+.glance dd{margin:0;font-family:var(--display);font-size:19px;line-height:1.3;font-weight:700}
+.glance dd small{display:block;font-family:var(--body);font-size:14.5px;font-weight:400;color:var(--ink-2);margin-top:3px}
+@media (max-width:700px){ .glance{grid-template-columns:minmax(0,1fr)} .glance div{padding:16px 0} }
+
+/* ---------- generic section ----------------------------------------------- */
+.section{padding-block:clamp(48px,7vw,76px)}
+.section + .section{padding-top:0}
+.section-head{margin-bottom:28px;max-width:var(--measure)}
+.section-head h2{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(25px,3.6vw,33px);line-height:1.15;letter-spacing:-.015em;
+  margin:8px 0 0;text-wrap:balance;
+}
+.section-head p{margin:12px 0 0;color:var(--ink-2);max-width:60ch}
+
+/* ---------- issue cards ---------------------------------------------------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:20px;display:flex;flex-direction:column;gap:10px;
+}
+.card h3{font-family:var(--display);font-size:21px;line-height:1.25;margin:0;font-weight:700}
+.card p{margin:0;color:var(--ink-2);font-size:16px}
+.card .more{margin-top:auto;padding-top:6px;font-size:15px;font-weight:600}
+.status{
+  align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:4px 9px;border-radius:999px;
+}
+.status.active{background:var(--red-wash);color:var(--red-ink)}
+.status.watching{background:var(--sage-wash);color:var(--sage-ink)}
+.status.closed{background:var(--surface-2);color:var(--muted)}
+
+/* ---------- poll ----------------------------------------------------------- */
+.poll{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(20px,3.5vw,32px);
+}
+.poll fieldset{border:0;margin:0;padding:0}
+.poll legend{padding:0}
+.q{padding:18px 0;border-top:1px solid var(--rule-soft)}
+.q:first-of-type{border-top:0;padding-top:4px}
+.q .qtext{font-size:17px;font-weight:600;margin:0 0 12px;max-width:58ch}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.scale.binary{grid-template-columns:repeat(2,minmax(0,160px))}
+.scale label{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  text-align:center;padding:11px 5px;border:1px solid var(--rule);border-radius:var(--radius);
+  font-size:12.5px;line-height:1.25;color:var(--ink-2);cursor:pointer;
+  transition:border-color .12s,background .12s;
+}
+.scale label:hover{border-color:var(--muted);background:var(--surface-2)}
+.scale input{margin:0;accent-color:var(--red-ink);width:17px;height:17px}
+.scale input:checked + span{color:var(--ink);font-weight:600}
+.scale label:has(input:checked){border-color:var(--red-ink);background:var(--red-wash)}
+
+.poll-foot{
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+  margin-top:22px;padding-top:20px;border-top:1px solid var(--rule);
+}
+.poll-note{font-size:14px;color:var(--muted);margin:0}
+.poll-msg{margin:14px 0 0;font-size:15.5px;color:var(--sage-ink);font-weight:600}
+.poll-msg[hidden]{display:none}
+
+/* results chart (diverging bars, centred on neutral) ------------------------ */
+.results{margin-top:26px;padding-top:24px;border-top:1px solid var(--rule)}
+.results h3{font-family:var(--display);font-size:20px;margin:0;font-weight:700}
+.results .meta{font-size:14px;color:var(--muted);margin:4px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);margin:14px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px}
+.sd{background:#d1453f}.dd{background:#e99b95}.nn{background:#b8b9ad}.aa{background:#8fb6e2}.sa{background:#2f72c4}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])) .nn{background:#6f7266}
+}
+:root[data-theme="dark"] .nn{background:#6f7266}
+
+.rrow{padding:11px 0;border-top:1px solid var(--rule-soft)}
+.rrow .rlabel{font-size:15px;line-height:1.35;margin:0}
+.track{position:relative;height:21px;margin-top:7px}
+.track .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--rule);z-index:1}
+.seg{position:absolute;top:0;height:100%;transition:opacity .14s}
+.seg.s-2,.seg.s-1{border-radius:4px 0 0 4px}
+.seg.s1,.seg.s2{border-radius:0 4px 4px 0}
+.seg.s0{border-radius:0}
+.track:hover .seg{opacity:.42}
+.track .seg:hover{opacity:1}
+.rmeta{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted);margin-top:5px}
+.rmeta b{color:var(--ink-2);font-weight:600;font-variant-numeric:tabular-nums}
+.rmeta span:first-child{white-space:nowrap}
+@media (max-width:520px){ .rmeta span:first-child{display:none} }
+
+.tip{
+  position:absolute;z-index:20;pointer-events:none;background:var(--ink);color:var(--ground);
+  font-size:12px;padding:6px 9px;border-radius:var(--radius);white-space:nowrap;
+  opacity:0;transition:opacity .1s;
+}
+
+/* ---------- events --------------------------------------------------------- */
+.events{display:flex;flex-direction:column;gap:0}
+.event{
+  display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 20px;
+  padding:18px 0;border-top:1px solid var(--rule);align-items:start;
+}
+.event:last-child{border-bottom:1px solid var(--rule)}
+.event .when{
+  font-family:var(--mono);font-size:12.5px;line-height:1.5;color:var(--red-ink);
+  text-transform:uppercase;letter-spacing:.06em;padding-top:3px;
+}
+.event h3{font-family:var(--display);font-size:20px;margin:0;font-weight:700}
+.event p{margin:5px 0 0;color:var(--ink-2);font-size:15.5px;max-width:58ch}
+@media (max-width:560px){ .event{grid-template-columns:minmax(0,1fr)} .event .when{padding-top:0} }
+.ev-check{margin:7px 0 0;font-size:13.5px;color:var(--muted);font-style:italic;max-width:58ch}
+
+/* ---------- involve -------------------------------------------------------- */
+.involve{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.panel{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:24px;
+}
+.panel h3{font-family:var(--display);font-size:22px;margin:0 0 10px;font-weight:700}
+.panel p{margin:0 0 12px;color:var(--ink-2);font-size:16px}
+.panel ul{margin:0 0 16px;padding-left:19px;color:var(--ink-2);font-size:16px}
+.panel li{margin-bottom:5px}
+.dues{
+  display:flex;gap:22px;margin:0 0 16px;padding:13px 0;
+  border-block:1px solid var(--rule-soft);
+}
+.dues div{display:flex;flex-direction:column}
+.dues b{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1}
+.dues span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+/* ---------- footer --------------------------------------------------------- */
+.site-footer{
+  margin-top:clamp(56px,8vw,88px);
+  background:var(--surface);border-top:1px solid var(--rule);
+  padding-block:44px 28px;
+}
+.foot-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:32px;align-items:start;
+}
+.foot-grid h2{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px;font-weight:500;
+}
+.foot-grid p,.foot-grid address{margin:0 0 9px;font-style:normal;color:var(--ink-2);font-size:15.5px;line-height:1.55}
+.foot-grid ul{list-style:none;margin:0;padding:0}
+.foot-grid li{margin-bottom:7px;font-size:15.5px}
+.subscribe{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.subscribe input{
+  flex:1 1 165px;min-width:0;font:inherit;font-size:15px;padding:10px 12px;
+  border:1px solid var(--rule);border-radius:var(--radius);
+  background:var(--ground);color:var(--ink);
+}
+.subscribe button{font-size:15px;padding:10px 16px}
+.social{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.social a{font-size:15px}
+.colophon{
+  margin-top:36px;padding-top:18px;border-top:1px solid var(--rule-soft);
+  display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;
+  font-size:13.5px;color:var(--muted);
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ==========================================================================
+   MEETINGS PAGE
+   ========================================================================== */
+
+.page-head{padding-block:clamp(34px,5.5vw,56px) 0}
+.page-head h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(31px,5.4vw,48px);line-height:1.06;letter-spacing:-.02em;
+  margin:10px 0 0;text-wrap:balance;
+}
+.page-head .lede{font-size:19px;line-height:1.55;color:var(--ink-2);margin:16px 0 0;max-width:58ch}
+
+/* the two standing meetings, side by side */
+.standing{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:18px;margin-top:34px}
+.standing .panel{display:flex;flex-direction:column}
+.standing .panel .kind{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red-ink);margin:0 0 6px;
+}
+.standing .panel .cadence{font-family:var(--display);font-size:23px;font-weight:700;margin:0 0 2px;line-height:1.2}
+.standing .panel .hours{color:var(--ink-2);margin:0 0 14px;font-size:16px}
+.standing dl{margin:0 0 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 14px;font-size:15px}
+.standing dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.standing dd{margin:0;color:var(--ink-2)}
+.standing .panel .next-up{
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--rule-soft);
+  font-size:15px;color:var(--ink);
+}
+.standing .panel .next-up b{color:var(--red-ink)}
+
+/* record summary tiles */
+.record-summary{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);
+  overflow:hidden;margin-top:24px;
+}
+.record-summary div{background:var(--surface);padding:15px 17px}
+.record-summary b{
+  display:block;font-family:var(--display);font-size:27px;line-height:1.1;font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.record-summary span{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-top:3px;
+}
+.record-summary .flag b{color:var(--red-ink)}
+@media (max-width:600px){ .record-summary{grid-template-columns:minmax(0,1fr)} }
+
+/* filter bar */
+.filterbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;align-items:center}
+.filterbar button{
+  font:inherit;font-size:14.5px;padding:7px 14px;cursor:pointer;
+  background:transparent;color:var(--ink-2);
+  border:1px solid var(--rule);border-radius:999px;
+}
+.filterbar button:hover{border-color:var(--muted);color:var(--ink)}
+.filterbar button.on{background:var(--ink);border-color:var(--ink);color:var(--ground);font-weight:600}
+.filterbar .spacer{flex:1 1 auto}
+.filterbar .chase{
+  font:inherit;font-size:14px;padding:7px 14px;cursor:pointer;
+  background:var(--red-wash);color:var(--red-ink);font-weight:600;
+  border:1px solid transparent;border-radius:999px;
+}
+.filterbar .chase:hover{border-color:var(--red-ink)}
+
+/* the record itself */
+#record{margin-top:12px}
+#record .year{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--muted);
+  font-weight:500;margin:26px 0 0;padding-bottom:8px;border-bottom:1px solid var(--ink);
+}
+#record .year:first-child{margin-top:14px}
+.rec{
+  display:grid;grid-template-columns:74px minmax(0,1fr) auto;
+  gap:6px 18px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--rule-soft);
+}
+.rec-when{
+  font-family:var(--mono);font-size:13px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;
+}
+.rec-kind{font-size:16.5px;color:var(--ink)}
+.rec.outstanding .rec-kind,.rec.pending .rec-kind{color:var(--ink-2)}
+.rec-doc{text-align:right}
+.doc{font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap}
+.doc:hover{text-decoration:underline}
+.ext{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);
+  border:1px solid var(--rule);border-radius:3px;padding:1px 5px;margin-left:7px;font-weight:400;
+}
+.mark{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;white-space:nowrap;display:inline-block;
+}
+.mark.pending{background:var(--surface-2);color:var(--muted)}
+.mark.out{background:transparent;color:var(--muted);border:1px solid var(--rule)}
+.rec.outstanding:hover .mark.out{border-color:var(--muted);color:var(--ink-2)}
+.empty{color:var(--muted);padding:26px 0}
+
+@media (max-width:640px){
+  .rec{grid-template-columns:68px minmax(0,1fr);}
+  .rec-doc{grid-column:2;text-align:left;margin-top:2px}
+}
+
+/* note under the record */
+.record-note{
+  margin-top:22px;padding:16px 18px;background:var(--surface-2);
+  border-left:3px solid var(--sage);border-radius:0 var(--radius) var(--radius) 0;
+  font-size:15.5px;color:var(--ink-2);
+}
+.record-note b{color:var(--ink)}
+
+/* ==========================================================================
+   YOUR TOWN — issue pages and closed survey results
+   ========================================================================== */
+
+.issue{padding-block:clamp(40px,6vw,64px);border-top:1px solid var(--rule)}
+.issue:first-of-type{border-top:0}
+.issue-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.15fr);gap:clamp(26px,4vw,48px);align-items:start}
+@media (max-width:900px){ .issue-grid{grid-template-columns:minmax(0,1fr)} }
+.issue h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,3.8vw,36px);
+  line-height:1.12;letter-spacing:-.018em;margin:8px 0 0;text-wrap:balance;
+}
+.issue .body p{color:var(--ink-2);margin:14px 0 0;max-width:56ch}
+.issue .body p.first{font-size:18.5px;color:var(--ink);line-height:1.55}
+.issue .body .btn-row{margin-top:22px}
+
+.fact{
+  margin-top:22px;padding:15px 18px;background:var(--surface-2);
+  border-left:3px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;
+  font-size:15.5px;color:var(--ink-2);
+}
+.fact b{color:var(--ink);display:block;margin-bottom:3px}
+
+/* survey block */
+.survey{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(18px,3vw,26px);position:relative;
+}
+.survey-head h3{font-family:var(--display);font-size:22px;font-weight:700;margin:6px 0 0;line-height:1.2}
+.survey-intro{color:var(--ink-2);font-size:15.5px;margin:10px 0 0;max-width:56ch}
+.survey .legend{margin:18px 0 2px}
+.qnote{display:block;font-size:13.5px;color:var(--muted);font-weight:400;margin-top:3px}
+.survey .rlabel{font-weight:600}
+
+.track.split{height:26px}
+.seg.yes{background:#2f72c4;border-radius:4px 0 0 4px}
+.seg.no{background:#d1453f;border-radius:0 4px 4px 0}
+.track.split .seg{border-radius:4px}
+i.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:baseline}
+i.sw.yes{background:#2f72c4}
+i.sw.no{background:#d1453f}
+
+.takeaway{
+  margin:22px 0 0;padding:15px 18px;background:var(--sage-wash);
+  border-radius:var(--radius);font-size:15.5px;color:var(--ink-2);
+}
+.takeaway b{color:var(--ink)}
+.survey-foot{margin:14px 0 0;font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* around town link list */
+.around{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:8px}
+.around a{
+  display:block;background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:20px;text-decoration:none;color:var(--ink);
+}
+.around a:hover{border-color:var(--ink);color:var(--ink)}
+.around h3{font-family:var(--display);font-size:20px;margin:0 0 7px;font-weight:700}
+.around p{margin:0;color:var(--ink-2);font-size:15.5px}
+
+/* ==========================================================================
+   BOARD / BUSINESSES / MEMBERSHIP / CONTACT
+   ========================================================================== */
+
+/* board */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.person{
+  display:grid;grid-template-columns:88px minmax(0,1fr);gap:18px;align-items:start;
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:20px;
+}
+.portrait{
+  width:88px;height:88px;border-radius:50%;overflow:hidden;
+  background:var(--surface-2);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:29px;font-weight:700;letter-spacing:.02em;
+}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.person h3{font-family:var(--display);font-size:21px;margin:0;font-weight:700;line-height:1.2}
+.person .role{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--red-ink);margin:5px 0 0;
+}
+.person .bio{margin:11px 0 0;color:var(--ink-2);font-size:15.5px}
+.person .bio.empty{color:var(--muted);font-style:italic}
+@media (max-width:420px){ .person{grid-template-columns:minmax(0,1fr)} }
+
+.seats{
+  margin-top:26px;background:var(--surface);border:1px solid var(--rule);
+  border-radius:var(--radius);padding:24px;
+}
+.seats h3{font-family:var(--display);font-size:22px;margin:0 0 10px;font-weight:700}
+.seats p{margin:0 0 14px;color:var(--ink-2)}
+.seats ul{margin:0 0 18px;padding-left:19px;color:var(--ink-2)}
+.seats li{margin-bottom:5px}
+
+/* businesses */
+.biz-list{margin-top:14px}
+.biz-item{
+  display:flex;gap:20px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;
+  padding:18px 0;border-bottom:1px solid var(--rule-soft);
+}
+.biz-item h3{font-family:var(--display);font-size:20px;margin:0;font-weight:700}
+.biz-item h3 a{text-decoration:none;color:var(--ink)}
+.biz-item h3 a:hover{color:var(--red-ink);text-decoration:underline}
+.biz-meta{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin:5px 0 0;
+}
+.biz-blurb{margin:8px 0 0;color:var(--ink-2);font-size:15.5px;max-width:52ch}
+.discount{
+  flex:0 0 auto;background:var(--sage-wash);color:var(--sage-ink);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 11px;border-radius:999px;white-space:nowrap;
+}
+
+/* membership tiers */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:8px}
+.tier{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:24px;display:flex;flex-direction:column;
+}
+.tier.lead{border-color:var(--red-ink);border-width:2px}
+.tier .tname{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:0;
+}
+.tier .price{font-family:var(--display);font-size:40px;font-weight:700;line-height:1;margin:10px 0 2px}
+.tier .per{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.tier ul{margin:0 0 20px;padding-left:19px;color:var(--ink-2);font-size:15.5px}
+.tier li{margin-bottom:6px}
+.tier .btn{margin-top:auto;text-align:center}
+
+.pay{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:26px;
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:22px}
+.pay img{width:132px;height:132px;border-radius:var(--radius);background:#fff}
+.pay .qr-ph{
+  width:132px;height:132px;border:1px dashed var(--rule);border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);padding:10px;
+}
+.pay div{flex:1 1 240px}
+.pay h3{font-family:var(--display);font-size:20px;margin:0 0 8px;font-weight:700}
+.pay p{margin:0 0 12px;color:var(--ink-2);font-size:15.5px}
+
+/* forms */
+.form{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(20px,3.5vw,30px);
+}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:14.5px;font-weight:600;margin-bottom:6px}
+.field .hint{display:block;font-weight:400;color:var(--muted);font-size:13.5px;margin-top:2px}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;font-size:16px;padding:11px 13px;
+  border:1px solid var(--rule);border-radius:var(--radius);
+  background:var(--ground);color:var(--ink);
+}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red-ink);outline:none}
+.field-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.form-msg{margin:14px 0 0;font-size:15.5px;font-weight:600}
+.form-msg[hidden]{display:none}
+.form .btn{margin-top:4px}
+
+/* contact routes */
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:8px}
+.route{background:var(--surface-2);border-radius:var(--radius);padding:18px}
+.route h3{font-family:var(--display);font-size:17.5px;margin:0 0 6px;font-weight:700}
+.route p{margin:0;font-size:15px;color:var(--ink-2)}
+
+/* bylaws summary */
+.rec-list{display:flex;flex-direction:column;gap:0}
+.bylaw{padding:20px 0;border-top:1px solid var(--rule-soft)}
+.bylaw:first-child{border-top:0;padding-top:4px}
+.bylaw h3{font-family:var(--display);font-size:20px;margin:0 0 8px;font-weight:700;line-height:1.25}
+.bylaw p{margin:0;color:var(--ink-2);max-width:60ch}
+.bylaw a{font-weight:600;white-space:nowrap}
+
+/* ==========================================================================
+   MEETING FLYER — screen, and one clean sheet of paper
+   ========================================================================== */
+
+.flyer{
+  max-width:720px;margin:0 auto;
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(26px,5vw,46px);
+}
+
+/* date on the left, identity on the right, one rule under both */
+.flyer-top{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding-bottom:14px;border-bottom:3px solid var(--red-ink);margin-bottom:22px;
+}
+.flyer-date{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.flyer-brand{
+  display:flex;align-items:center;gap:10px;text-align:left;
+  font-family:var(--display);font-size:15px;line-height:1.15;font-weight:700;
+  color:var(--ink);
+}
+.flyer-brand img{width:54px;height:auto;flex:0 0 auto}
+@media (max-width:520px){
+  .flyer-brand{font-size:13.5px}
+  .flyer-brand img{width:42px}
+}
+.fd-month{
+  font-family:var(--mono);font-size:15px;letter-spacing:.18em;
+  color:var(--red-ink);font-weight:500;
+}
+.fd-day{
+  font-family:var(--display);font-size:clamp(46px,9vw,72px);line-height:.9;
+  font-weight:700;letter-spacing:-.03em;
+}
+.fd-dow{font-family:var(--body);font-size:17px;color:var(--ink-2)}
+
+.flyer-head h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(27px,4.6vw,40px);line-height:1.1;letter-spacing:-.02em;
+  margin:8px 0 0;text-wrap:balance;
+}
+.flyer-who{margin:10px 0 0;font-size:17px;color:var(--ink-2)}
+.flyer-who b{color:var(--ink)}
+
+.flyer-facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);
+  margin:26px 0 0;overflow:hidden;
+}
+.flyer-facts > div{background:var(--surface);padding:14px 16px}
+.flyer-facts dt{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:5px;
+}
+.flyer-facts dd{margin:0;font-size:15.5px;line-height:1.45;color:var(--ink)}
+
+.flyer-body p{margin:24px 0 0;font-size:17px;line-height:1.6;color:var(--ink-2);max-width:60ch}
+
+.flyer-ask{
+  margin-top:24px;padding:20px 22px;
+  background:var(--red-wash);border-radius:var(--radius);
+}
+.fa-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red-ink);margin:0 0 8px;
+}
+.fa-q{
+  font-family:var(--display);font-size:clamp(20px,3vw,25px);line-height:1.25;
+  font-weight:700;margin:0;color:var(--ink);text-wrap:balance;
+}
+.fa-why{margin:10px 0 0;font-size:15.5px;color:var(--ink-2);max-width:58ch}
+
+.flyer-foot{
+  margin:26px 0 0;padding-top:18px;border-top:1px solid var(--rule-soft);
+  font-size:15px;color:var(--ink-2);
+}
+.fp-url{font-family:var(--mono);font-size:13.5px;color:var(--muted);white-space:nowrap}
+
+.flyer-actions{
+  max-width:720px;margin:22px auto 0;display:flex;gap:10px;flex-wrap:wrap;
+  justify-content:center;
+}
+
+@media print{
+  /* .agenda-ask is the web form for requesting an agenda item — it belongs on
+     the page, never on the printed noticeboard flyer, where it was silently
+     adding a second sheet. */
+  .site-header,.site-footer,.flyer-actions,.skip,.page-head .lede,
+  .agenda-ask{display:none!important}
+  body{background:#fff;font-size:12pt}
+  .flyer{
+    max-width:none;border:0;box-shadow:none;padding:0;
+    page-break-inside:avoid;
+  }
+  .flyer-facts{border-color:#bbb}
+  .flyer-facts > div{background:#fff}
+  .fd-day{font-size:60pt}
+  .flyer-brand{font-size:11pt}
+  .flyer-brand img{width:46px}
+  /* browsers drop background graphics when printing; the logo is an
+     <img>, so it survives either way */
+  .flyer-top{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .flyer-ask{background:#f4f4f4;border:1px solid #ddd}
+  a{color:#000;text-decoration:underline}
+  .section,.page-head{padding-block:0}
+}
+
+/* ==========================================================================
+   RECAPS + ADVOCACY LEDGER + AGENDA REQUEST
+   ========================================================================== */
+
+.recap{padding:22px 0;border-top:1px solid var(--rule-soft)}
+.recap:first-child{border-top:0;padding-top:4px}
+.recap-when{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 6px;
+}
+.recap h3{font-family:var(--display);font-size:21px;line-height:1.25;margin:0;font-weight:700;text-wrap:balance}
+.recap p{margin:10px 0 0;color:var(--ink-2);max-width:62ch}
+.recap-next{
+  margin-top:12px;padding-left:13px;border-left:3px solid var(--sage);
+  font-size:15.5px;
+}
+.recap-next b{color:var(--ink)}
+
+.ask{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:20px 22px;margin-top:16px;
+}
+.ask:first-child{margin-top:0}
+.ask-head{display:flex;gap:14px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.ask-head h3{font-family:var(--display);font-size:20px;margin:0;font-weight:700;line-height:1.25}
+.ask-head h3 a{text-decoration:none;color:var(--ink)}
+.ask-head h3 a:hover{color:var(--red-ink);text-decoration:underline}
+.mark.answered{background:var(--sage-wash);color:var(--sage-ink)}
+.mark.open{background:transparent;color:var(--muted);border:1px solid var(--rule)}
+.ask-body{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:9px 16px;
+  margin:14px 0 0;font-size:15.5px;
+}
+.ask-body dt{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding-top:4px;white-space:nowrap;
+}
+.ask-body dd{margin:0;color:var(--ink-2)}
+.ask-pending{color:var(--muted);font-style:italic}
+.ask-date{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+@media (max-width:520px){
+  .ask-body{grid-template-columns:minmax(0,1fr);gap:3px 0}
+  .ask-body dt{padding-top:10px}
+}
+
+.agenda-ask{
+  margin-top:26px;background:var(--surface-2);border-radius:var(--radius);
+  padding:22px 24px;
+}
+.agenda-ask h3{font-family:var(--display);font-size:20px;margin:0 0 8px;font-weight:700}
+.agenda-ask > p{margin:0 0 16px;color:var(--ink-2);font-size:15.5px;max-width:58ch}
+.agenda-ask .form{box-shadow:none;border-color:var(--rule)}
+
+/* ============================================================
+   New-resident page (/new)
+   ============================================================ */
+.place-meta{
+  font-family:var(--mono);font-size:13.5px;line-height:1.6;
+  color:var(--ink-2);margin:0;
+}
+.place-meta a{color:inherit}
+
+.who-list{display:grid;gap:16px}
+.who-item{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:20px 22px;border-left:3px solid var(--sage);
+}
+.who-item h3{font-family:var(--display);font-size:22px;line-height:1.2;margin:0;font-weight:700}
+.who-what{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--sage-ink);margin:6px 0 10px;
+}
+.who-item p{margin:0;color:var(--ink-2);font-size:16px}
+.who-item .more{margin-top:12px;font-size:15px;font-weight:600}
+.hero-new{margin:14px 0 0;font-size:15px;color:var(--ink-2)}
+.hero-new a{font-weight:600}
+
+/* ============================================================
+   Problem map (/map)
+   The OSM tiles are light in both themes on purpose — inverting
+   map tiles for dark mode makes roads and labels lie. The frame,
+   the pins and everything around the map follow the theme.
+   ============================================================ */
+.map-note{
+  background:var(--surface-2);border-left:3px solid var(--red);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:15px 18px;margin:0 0 18px;
+}
+.map-note p{margin:0;font-size:15.5px;color:var(--ink-2)}
+.map-note b{color:var(--ink)}
+
+#map-filters{margin:0 0 12px}
+#map-filters button{display:inline-flex;align-items:center}
+.chip-glyph{display:inline-flex;margin-right:6px;vertical-align:-2px}
+.chip-glyph svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round}
+
+.lvmap{
+  height:clamp(340px,58vh,560px);width:100%;
+  border:1px solid var(--rule);border-radius:var(--radius);
+  background:var(--surface-2);z-index:0;
+}
+.lvmap:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.map-count{margin:10px 0 0;font-size:14.5px;color:var(--muted)}
+.map-down{padding:28px;text-align:center;color:var(--ink-2);font-size:15.5px}
+
+/* ---- pins: one HTML span, no marker images to 404 ---- */
+.pin-wrap{background:none;border:0}
+.pin{
+  display:flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50% 50% 50% 2px;
+  transform:rotate(-45deg);
+  background:var(--red);border:2px solid #fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
+}
+.pin svg{
+  width:13px;height:13px;transform:rotate(45deg);
+  fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+.pin-draft{background:var(--sage-ink);animation:pin-drop .18s ease-out}
+@keyframes pin-drop{from{transform:rotate(-45deg) translateY(-8px);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.pin-draft{animation:none}}
+
+.leaflet-popup-content{font-family:var(--body);font-size:14.5px;line-height:1.45}
+.leaflet-popup-content b{font-family:var(--body);font-weight:600}
+.pop-when{font-family:var(--mono);font-size:11.5px;color:#666}
+
+/* ---- the form beside the map ---- */
+.report-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:26px;align-items:start}
+@media (max-width:820px){.report-grid{grid-template-columns:1fr}}
+
+.report-form .step{margin:0 0 4px;font-size:15.5px;color:var(--ink-2)}
+.pin-state{display:block;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:4px}
+.report-form .field label b,.report-form .step b{color:var(--red-ink);font-family:var(--mono);font-size:13px;margin-right:2px}
+
+.report-side{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:20px 22px;
+}
+.report-side h3{font-family:var(--display);font-size:18px;margin:18px 0 8px;font-weight:700}
+.report-side h3:first-child{margin-top:0}
+.steps{margin:0;padding-left:20px;color:var(--ink-2);font-size:15px}
+.steps li{margin:0 0 6px}
+.side-note{margin:0;color:var(--ink-2);font-size:15px}
+.lvmap-down{display:flex;align-items:center;justify-content:center}
+.map-down b{color:var(--ink)}
+
+[hidden]{display:none !important}
+
+/* ---- review queue (/review) ---- */
+.review-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.review-who{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.pending-item{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);
+  border-left:3px solid var(--red);padding:16px 18px;margin:14px 0;
+}
+.pending-head{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:16px}
+.pending-head b{font-weight:600}
+.pending-date{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pending-note{margin:0 0 8px;font-size:16.5px;color:var(--ink)}
+.pending-meta{margin:0 0 10px;font-family:var(--mono);font-size:12.5px}
+.pending-item .btn-row{margin:0}
+.review-foot{margin:26px 0 0;font-size:14px;color:var(--muted);line-height:1.6}
+.review-foot code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:3px}
+.pay-note{margin:8px 0 14px;font-size:14.5px;color:var(--muted)}
+.mark.partial{background:var(--red-wash);color:var(--red-ink)}
+.ask-still{border-left:2px solid var(--red);padding-left:12px}
+
+/* ============================================================
+   Housing price chart (/your-town#housing)
+   One series, so no legend: the heading names what is plotted.
+   Text never wears the data colour — only the line and dot do.
+   ============================================================ */
+.chart-fig{margin:0;padding:0}
+#housing-chart{position:relative}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:var(--radius)}
+
+.c-grid{stroke:var(--rule-soft);stroke-width:1}
+.c-area{fill:var(--red);opacity:.08}
+.c-line{fill:none;stroke:var(--red);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.c-dot{fill:var(--red);stroke:var(--ground);stroke-width:2}
+
+.c-ytick,.c-xtick{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.c-endlab{font-family:var(--body);font-size:14px;font-weight:600;fill:var(--ink)}
+
+/* The ADU marks are hairlines, not flags — see the note in app.js §11. */
+.c-mark{stroke:var(--muted);stroke-width:1;opacity:.55}
+.c-marklab{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;fill:var(--muted)}
+
+.c-cross{stroke:var(--ink-2);stroke-width:1;opacity:0;transition:opacity .08s;pointer-events:none}
+.c-hit{fill:var(--red);stroke:var(--ground);stroke-width:2;pointer-events:none}
+
+.c-tip{
+  position:absolute;transform:translate(-50%,-140%);pointer-events:none;
+  background:var(--ink);color:var(--ground);border-radius:var(--radius);
+  padding:6px 10px;white-space:nowrap;z-index:5;
+}
+.c-tip b{display:block;font-family:var(--body);font-size:15px;font-weight:600;line-height:1.1}
+.c-tip span{font-family:var(--mono);font-size:10.5px;opacity:.72}
+
+.chart-fig figcaption{margin-top:18px}
+.chart-fig figcaption p{margin:0 0 12px;font-size:15.5px;color:var(--ink-2);max-width:72ch}
+.chart-fig figcaption b{color:var(--ink)}
+.mark-notes{margin:14px 0 12px;padding-left:19px;font-size:15px;color:var(--ink-2);max-width:72ch}
+.mark-notes li{margin-bottom:8px}
+.mark-notes b{color:var(--ink)}
+.src{font-size:13.5px;color:var(--muted)}
+
+.table-view{margin-top:6px}
+.table-view summary{cursor:pointer;font-size:14.5px;color:var(--ink-2);font-weight:600}
+.table-view table{border-collapse:collapse;margin-top:12px;font-size:14.5px}
+.table-view caption{text-align:left;color:var(--muted);font-size:13px;margin-bottom:8px}
+.table-view th,.table-view td{
+  text-align:left;padding:5px 22px 5px 0;border-bottom:1px solid var(--rule-soft);
+  font-variant-numeric:tabular-nums;
+}
+.table-view th{font-family:var(--mono);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:500}
+
+@media print{ .table-view{display:none} .c-tip{display:none} }
+
+/* ---- indexed comparison chart: three series ----
+   Slots 1-3 of the dataviz default categorical theme. These are the only
+   three hues that clear the all-pairs colour-blind gates on BOTH the light
+   and the dark ground — the site's own red and sage do not, which is why
+   this chart doesn't use them. Identity is also carried by the legend and
+   by a direct label on the end of every line, never by colour alone. */
+.s-price{--s:#eb6834}
+.s-rent {--s:#2a78d6}
+.s-cpi  {--s:#1baf7a}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])) .s-price{--s:#d95926}
+  :root:where(:not([data-theme="light"])) .s-rent {--s:#3987e5}
+  :root:where(:not([data-theme="light"])) .s-cpi  {--s:#199e70}
+}
+:root[data-theme="dark"] .s-price{--s:#d95926}
+:root[data-theme="dark"] .s-rent {--s:#3987e5}
+:root[data-theme="dark"] .s-cpi  {--s:#199e70}
+
+polyline.c-line.s-price,polyline.c-line.s-rent,polyline.c-line.s-cpi{stroke:var(--s)}
+circle.c-dot.s-price,circle.c-dot.s-rent,circle.c-dot.s-cpi{fill:var(--s);stroke:var(--ground);stroke-width:2}
+.c-serieslab{font-family:var(--body);font-size:12.5px;font-weight:600;fill:var(--ink)}
+.c-base{stroke:var(--rule)}
+.c-baselab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;fill:var(--muted)}
+
+.c-legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 10px}
+.c-key{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:var(--ink-2)}
+.c-key i{display:inline-block;width:16px;height:2px;background:var(--s);border-radius:1px}
+
+.chart-fig-2{margin-top:44px;padding-top:32px;border-top:1px solid var(--rule-soft)}
+.cap-top{margin:0 0 16px}
+.cap-top h3{font-family:var(--display);font-size:21px;font-weight:700;margin:0 0 8px}
+
+/* On a phone an 880-unit viewBox squeezed into 360px makes the tick labels
+   unreadable and clips the end labels. Give the charts their own horizontal
+   scroll instead of shrinking them — the page itself still never scrolls
+   sideways. The tooltip is positioned in the SVG's own coordinate space, so
+   it scrolls along with the chart correctly. */
+.chart-scroll-note{
+  display:none;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);margin:6px 0 0;
+}
+@media (max-width:660px){
+  #housing-chart,#index-chart{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #housing-chart .chart,#index-chart .chart{min-width:620px}
+  .chart-scroll-note{display:block}
+}
+
+/* ---- history page (/history) ---- */
+.hist h2{
+  font-family:var(--display);font-size:clamp(23px,3vw,28px);font-weight:700;
+  line-height:1.2;margin:38px 0 12px;
+}
+.hist h2:first-child{margin-top:0}
+.hist p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--ink-2)}
+.hist p.first{font-size:18px;color:var(--ink)}
+.hist b{color:var(--ink)}
+.hist-list{margin:0 0 16px;padding-left:20px;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
+.hist-list li{margin-bottom:9px}
+.hist-list b{color:var(--ink)}
+.src-note{font-size:15.5px;color:var(--muted)}
+.hist .fact{margin:30px 0}
+.hist .btn-row{margin-top:32px}
+
+/* ---- photographs with credit lines (history page) ---- */
+.photo{margin:26px 0 30px}
+.photo img{
+  display:block;width:100%;height:auto;border-radius:var(--radius);
+  border:1px solid var(--rule);background:var(--surface-2);
+}
+.photo figcaption{margin-top:10px;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.photo figcaption b{color:var(--ink)}
+.photo .credit{
+  display:block;margin-top:7px;font-family:var(--mono);font-size:11.5px;
+  line-height:1.5;color:var(--muted);
+}
+.photo .credit a{color:inherit}
+.followup-h{margin:40px 0 4px;font-size:24px}
+.side-note + .side-note{margin-top:10px}
+
+/* problem map: Linda Vista outline and the shade outside it.
+   Fixed colours, not theme tokens: the OpenStreetMap tiles are light in
+   both themes, so the shade and edge must be dark in both. Not red — the
+   tiles draw freeways in red and a red edge disappears into them. */
+.lv-outside{fill:#1c2018;fill-opacity:.22}
+.lv-edge{stroke:#1c2018;stroke-width:3;stroke-opacity:.85;stroke-dasharray:8 5}
+
+/* outreach tally (home page, Balboa Park survey) */
+.btn-row.tally-row{margin-top:10px}
+.tally{font-size:15px;color:var(--ink-2);margin:0}

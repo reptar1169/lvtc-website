@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Backups made before edits — Git history replaces these
+*.before-*
+*.bak
+
+# Firebase CLI cache and logs
+.firebase/
+*.log
+
+# Cloud Functions dependencies (reinstall with: cd functions && npm install)
+node_modules/

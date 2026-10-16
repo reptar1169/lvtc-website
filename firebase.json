@@ -1,0 +1,125 @@
+{
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "README.md",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.pst",
+      "**/*.msg",
+      "**/*.eml",
+      "**/*.before-*",
+      "**/*.bak",
+      "LVTC logo.svg",
+      "LVTC logo with words.jpeg",
+      "firestore.rules",
+      "**/*.sh",
+      "functions/**",
+      "**/*.log"
+    ],
+    "redirects": [
+      {
+        "source": "/new-page-1",
+        "destination": "/businesses",
+        "type": 301
+      },
+      {
+        "source": "/lv-businesses",
+        "destination": "/businesses",
+        "type": 301
+      },
+      {
+        "source": "/members",
+        "destination": "/board",
+        "type": 301
+      },
+      {
+        "source": "/linda-vista-planning-group",
+        "destination": "/new#who",
+        "type": 301
+      },
+      {
+        "source": "/linda-vista-farmers-market",
+        "destination": "/new#places",
+        "type": 301
+      },
+      {
+        "source": "/who-we-are",
+        "destination": "/board",
+        "type": 301
+      },
+      {
+        "source": "/linda-vista-update",
+        "destination": "/new#first-week",
+        "type": 301
+      },
+      {
+        "source": "/history-of-linda-vista",
+        "destination": "/history",
+        "type": 301
+      },
+      {
+        "source": "/memberships",
+        "destination": "/membership",
+        "type": 301
+      },
+      {
+        "source": "/hometown-heroes",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/store-1",
+        "destination": "/membership",
+        "type": 301
+      }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|pdf|doc|docx)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "/vendor/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "functions": {
+    "source": "functions",
+    "predeploy": [],
+    "ignore": [
+      "node_modules",
+      ".git",
+      "*.local",
+      "*.before-*",
+      "*.bak",
+      "npm-debug.log"
+    ]
+  }
+}

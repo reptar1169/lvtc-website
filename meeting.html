@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>This month's meeting — Linda Vista Town Council</title>
+<meta name="description" content="Details for the next Linda Vista Town Council general meeting: date, time, venue and what is on the agenda.">
+<link rel="canonical" href="https://lindavistatowncouncil.org/meeting">
+
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="This month's meeting — Linda Vista Town Council">
+<meta property="og:description" content="When and where the council meets next, and what is on the agenda.">
+<meta property="og:url" content="https://lindavistatowncouncil.org/meeting">
+<meta property="og:image" content="https://lindavistatowncouncil.org/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="shell">
+    <a class="brand" href="/">
+      <!-- Drop the council's logo in as logo.png next to index.html.
+           If it's missing, the wordmark below stands on its own. -->
+      <img src="logo.png" alt="" width="40" onerror="this.remove()">
+      <span class="wordmark">Linda Vista <span>Town Council</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/new">New Here</a>
+      <a href="/meetings">Meetings</a>
+      <a href="/events">Events</a>
+      <a href="/your-town">Your Town</a>
+      <a href="/map">Map</a>
+      <a href="/businesses">Businesses</a>
+      <a href="/contact">Contact</a>
+      <a class="cta" href="/membership">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-top:clamp(26px,4vw,44px)">
+    <div class="shell">
+      <div class="flyer" id="flyer"></div>
+      <div class="agenda-ask">
+        <h3>Want something on the agenda?</h3>
+        <p>Anyone who lives or works in Linda Vista can raise an item. Tell us before
+           the meeting and the board can give it proper time, rather than squeezing it
+           in at the end.</p>
+
+        <form class="form" data-contact="Agenda request">
+          <div class="field-row">
+            <div class="field">
+              <label for="a-name">Your name</label>
+              <input id="a-name" name="name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="a-email">Email</label>
+              <input id="a-email" name="email" type="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="a-topic">What would you like raised?</label>
+            <textarea id="a-topic" name="message" required></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="a-speak">Do you want to speak to it?</label>
+              <select id="a-speak" name="speaking">
+                <option value="yes">Yes, I would like to speak</option>
+                <option value="no">No, just raise it</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="a-time">Roughly how long? <span class="hint">Optional</span></label>
+              <input id="a-time" name="minutes" type="text" placeholder="e.g. 5 minutes">
+            </div>
+          </div>
+          <input type="hidden" name="topic" value="agenda">
+          <button class="btn btn-primary" type="submit">Send to the board</button>
+          <p class="form-msg" role="status" hidden></p>
+        </form>
+      </div>
+
+      <div class="flyer-actions">
+        <button class="btn btn-ghost" type="button" onclick="window.print()">Print or save as PDF</button>
+        <a class="btn btn-ghost" href="/meetings">All meetings and minutes</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="foot-grid">
+
+      <div>
+        <h2>Linda Vista Town Council</h2>
+        <address>
+          2130 Ulric Street<br>
+          San Diego, CA 92111
+        </address>
+        <!-- CONFIRM this address is live before publishing -->
+        <p><a href="mailto:lvtowncouncil@gmail.com">lvtowncouncil@gmail.com</a></p>
+        <p><a href="/board">Who&rsquo;s on the board &rarr;</a></p>
+
+        <!-- Social links intentionally omitted until the real account URLs are
+             known. The old site linked to instagram.com / facebook.com /
+             twitter.com — the platforms' front pages, not the council. Add the
+             real profile URLs here, or leave this out.
+        <div class="social">
+          <a href="https://www.instagram.com/YOURHANDLE">Instagram</a>
+          <a href="https://www.facebook.com/YOURPAGE">Facebook</a>
+        </div>
+        -->
+      </div>
+
+      <div>
+        <h2>Meetings</h2>
+        <p><strong>General</strong><br>3rd Wednesday, 6:00pm<br>Baha'i Faith Center &middot; in person</p>
+        <p><strong>Board</strong><br>1st Wednesday, 6:00pm<br>Zoom only</p>
+        <p><a href="/meetings">Agendas and minutes →</a></p>
+      </div>
+
+      <div>
+        <h2>Around town</h2>
+        <ul>
+          <li><a href="https://www.lindavistaplanning.org/" rel="noopener">Linda Vista Planning Group</a></li>
+          <li><a href="https://www.lovelindavista.org/" rel="noopener">Farmers Market</a></li>
+          <li><a href="https://lindavistaupdate.substack.com/" rel="noopener">Linda Vista Update newsletter</a></li>
+          <li><a href="/events">What&rsquo;s coming up</a></li>
+          <li><a href="/new">New to Linda Vista</a></li>
+          <li><a href="/history">How Linda Vista got here</a></li>
+          <li><a href="/map">Problem map</a></li>
+          <li><a href="/businesses">Local businesses</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Stay in the loop</h2>
+        <p>A short email before each meeting with the agenda. Nothing else.</p>
+        <form class="subscribe" id="subscribe-form" action="#" method="post">
+          <label class="skip" for="sub-email">Email address</label>
+          <input id="sub-email" name="email" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Sign up</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="colophon">
+      <span>© <span id="year">2026</span> Linda Vista Town Council · a volunteer 501(c) community organization</span>
+      <span><a href="/bylaws">Bylaws</a> · <a href="/board">Board</a> · <a href="/contact">Contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="minutes.js"></script>
+<script src="firebase-config.js"></script>
+<script src="updates.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
