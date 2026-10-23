@@ -53,6 +53,17 @@ var EVENTS = [
     url: 'https://www.dea.gov/takebackday',
     flyer: '/img/flyers/2026-10-24-rx-take-back.webp' },
 
+  { date: '2026-11-03',
+    title: 'Election Day',
+    blurb: 'The last day to vote in the general election. Mail your ballot (no ' +
+           'stamp needed), drop it in any official ballot drop box, or vote in ' +
+           'person at any vote center in the county &mdash; all of them are open ' +
+           'daily from Saturday 31 October, 8am&ndash;5pm. Missed the registration ' +
+           'deadline? You can still register and vote the same day at any vote ' +
+           'center. Find yours at sdvote.com.',
+    detail: 'Vote centers and drop boxes 7:00am–8:00pm',
+    url: 'https://www.sdvote.com/' },
+
   { date: '2026-11-14',
     title: 'Mesa Architecture Student Showcase',
     blurb: 'Architecture students from San Diego Mesa College show their own ' +
