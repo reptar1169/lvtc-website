@@ -17,6 +17,12 @@
                   field here: it means people get the details from the people
                   running the thing, and a change on their end does not leave
                   our copy wrong.
+     flyer        Optional. Path to a flyer image or PDF someone sent us, e.g.
+                  '/img/flyers/2026-10-24-rx-take-back.webp'. Adds a "See the
+                  flyer" link. Name files by event date so old ones are easy
+                  to find and delete. The blurb should still carry the key
+                  facts as text: a flyer is a picture, and screen readers and
+                  search engines can't read it.
      unconfirmed  Optional. true adds a visible note that the council has not
                   verified the details. Use it for anything taken off a flyer
                   we could not check against a source. It is better to post
@@ -34,6 +40,18 @@ var EVENTS = [
            'Open to anyone. Not a council event, and not in Linda Vista this time ' +
            '\u2014 the June one was at Bayside.',
     detail: '9:00am \u00b7 Mission Trails Regional Park Visitor Center' },
+
+  { date: '2026-10-24',
+    title: 'Prescription Drug Take Back Day',
+    blurb: 'Drop off unneeded or expired medication for safe disposal \u2014 free ' +
+           'and anonymous, no questions asked. Pills, liquids and pet medication ' +
+           'are accepted; needles, injector pens, vapes and illicit drugs are not. ' +
+           'Run by the DEA with local police, not by the council. The nearest ' +
+           'site is SDPD Western Division in Linda Vista; the flyer lists every ' +
+           'San Diego County site.',
+    detail: '10:00am\u20132:00pm \u00b7 SDPD Western Division, 5215 Gaines St',
+    url: 'https://www.dea.gov/takebackday',
+    flyer: '/img/flyers/2026-10-24-rx-take-back.webp' },
 
   { date: '2026-11-14',
     title: 'Mesa Architecture Student Showcase',

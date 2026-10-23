@@ -330,6 +330,7 @@ a:hover{color:var(--red-ink)}
 .event h3{font-family:var(--display);font-size:20px;margin:0;font-weight:700}
 .event p{margin:5px 0 0;color:var(--ink-2);font-size:15.5px;max-width:58ch}
 @media (max-width:560px){ .event{grid-template-columns:minmax(0,1fr)} .event .when{padding-top:0} }
+.ev-flyer{font-size:15px;font-weight:600}
 .ev-check{margin:7px 0 0;font-size:13.5px;color:var(--muted);font-style:italic;max-width:58ch}
 
 /* ---------- involve -------------------------------------------------------- */

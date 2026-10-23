@@ -219,7 +219,7 @@
       if (when < midnight) return;          // yesterday's event is not "coming up"
       rows.push({ date: when, title: e.title, blurb: e.blurb,
                   detail: e.detail || '', url: e.url || '',
-                  unconfirmed: !!e.unconfirmed });
+                  flyer: e.flyer || '', unconfirmed: !!e.unconfirmed });
     });
 
     rows.sort(function (a, b) { return a.date - b.date; });
@@ -233,6 +233,9 @@
           '<br>' + DAYS[r.date.getDay()].slice(0, 3) + '</p>' +
         '<div><h3>' + title + '</h3>' +
           '<p>' + r.blurb + (r.detail ? ' <span style="color:var(--muted)">' + r.detail + '</span>' : '') + '</p>' +
+          (r.flyer
+            ? '<p class="ev-flyer"><a href="' + r.flyer + '" target="_blank" rel="noopener">See the flyer &rarr;</a></p>'
+            : '') +
           (r.unconfirmed
             ? '<p class="ev-check">The council has not confirmed these details. ' +
               'Check with the organizer before you go.</p>'
